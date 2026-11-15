@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbourline Creative: Class Slides</title>
+<style>
+:root{--b1:#0f2b36;--b2:#1b5e72;--a:#5fd0e0;--ink:#fff;--card:rgba(255,255,255,.1);--line:rgba(255,255,255,.25)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(135deg,var(--b1),var(--b2));transition:background .4s;color:var(--ink);font:clamp(15px,1.45vw,24px)/1.4 "Avenir Next","Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+#top{display:flex;justify-content:space-between;align-items:center;padding:12px 4vw 0;min-height:3em}
+#step{background:var(--a);color:#111;font-weight:700;padding:.15em .8em;border-radius:30px}
+#step:empty{display:none}
+#tm{font:700 1.7em Georgia,serif;font-variant-numeric:tabular-nums;cursor:pointer;background:rgba(0,0,0,.25);padding:0 .5em;border-radius:10px}
+#tm:empty{display:none}
+#tm.late{color:#ff8f70}
+#s{flex:1;overflow:auto;padding:1.5vh 5vw;display:flex;flex-direction:column;justify-content:center;max-width:1500px;width:100%;margin:0 auto}
+h1{font:700 clamp(2rem,5.2vw,4.8rem)/1.05 Georgia,"Iowan Old Style",serif;margin:0 0 .4em;max-width:20ch}
+h1.sm{font-size:clamp(1.6rem,3.6vw,3.2rem);max-width:30ch}
+.sub{opacity:.85;margin:0 0 1em;max-width:56ch}
+.how{display:flex;flex-wrap:wrap;gap:.7em;margin:.2em 0 .8em}
+.how div{flex:1 1 15em;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--a);border-radius:12px;padding:.6em .9em}
+.how b{color:var(--a)}
+.out{opacity:.85;margin-top:.8em;font-size:.85em}
+.out strong{color:var(--a)}
+.w{margin-top:.4em}
+.row{display:flex;flex-wrap:wrap;gap:.8em}
+button,input{font:inherit}
+button{cursor:pointer;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:.3em 1em;border-radius:8px}
+button:hover{background:rgba(255,255,255,.2)}
+button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.big{flex:1 1 9em;padding:.8em;font-size:1.3em;font-weight:700;text-align:center;border-radius:14px;border:0;color:#111;background:var(--a)}
+.big:nth-child(2){background:#ffd166}
+.big:nth-child(3){background:#ff9ad5}
+.big:nth-child(4){background:#9be564}
+.big small{display:block;font-size:.6em;font-weight:600;opacity:.8}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(11em,1fr));gap:.7em}
+.col{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--a);border-radius:12px;padding:.5em .6em;min-height:7em}
+.col:nth-child(2){border-top-color:#ffd166}.col:nth-child(3){border-top-color:#ff9ad5}.col:nth-child(4){border-top-color:#9be564}
+.col h3{margin:0 0 .3em;font-size:1em}
+.col input{width:100%;background:rgba(0,0,0,.25);border:1px solid var(--line);color:#fff;padding:.3em .5em;border-radius:6px}
+.it{display:flex;gap:.3em;align-items:center;margin:.3em 0;background:rgba(255,255,255,.14);border-radius:6px;padding:.15em .3em .15em .6em;cursor:pointer}
+.it.x span{text-decoration:line-through;opacity:.5}
+.it span{flex:1}
+.it button{padding:0 .5em;background:transparent;border:0}
+.tl{display:flex;align-items:center;gap:.6em;margin:.35em 0}
+.tl button{flex:0 0 22em;max-width:48%;text-align:left}
+.dots{color:var(--a);letter-spacing:.1em;word-break:break-all}
+.vr{display:flex;flex-wrap:wrap;gap:.4em;align-items:center;margin:.3em 0}
+.vr label{flex:0 0 16em;max-width:100%}
+.vr button{width:2.2em;padding:.2em 0;font-weight:700}
+.vr button.on{background:var(--a);color:#111;border-color:var(--a)}
+.ch{display:flex;flex-wrap:wrap;gap:.5em;align-items:center}
+.ch button{border-radius:30px;font-weight:700;padding:.5em 1.1em;font-size:1.1em}
+.ch .t1{background:#9be564;color:#111}.ch .t2{background:#ff9a52;color:#111}
+.ctl{margin-top:.6em;font-size:.7em;opacity:.8}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.6em;margin-top:.5em}
+.map button{text-align:left;padding:.5em .8em;border-radius:12px;border-left:6px solid var(--a)}
+.map small{display:block;opacity:.75}
+.map b{float:right}
+#pk,#gs{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:9;padding:4vw}
+#pk.on,#gs.on{display:flex}
+#pk>div,#gs>div{background:var(--b1);border:2px solid var(--a);border-radius:18px;padding:1.2em;max-width:34em;width:100%;text-align:center}
+#pk textarea{width:100%;min-height:6em;background:rgba(0,0,0,.3);color:#fff;border:1px solid var(--line);border-radius:8px;padding:.5em;font:inherit}
+#pn{font:700 3em Georgia,serif;margin:.3em 0;min-height:1.2em;color:var(--a)}
+.op{display:block;width:100%;text-align:left;margin:.35em 0;padding:.5em .9em}
+.op.on{border-color:var(--a);background:rgba(255,255,255,.22)}
+.op.ok,.ch .ok{background:#9be564;color:#111;border-color:#9be564}
+.op.no{background:#ff8f70;color:#111;border-color:#ff8f70}
+.why{margin-top:.6em;padding:.5em .8em;border-left:4px solid var(--a);background:rgba(0,0,0,.25);border-radius:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+.gs-i{width:100%;margin:.2em 0;background:rgba(0,0,0,.3);color:#fff;border:1px solid var(--line);border-radius:8px;padding:.35em .6em;font:inherit}
+#gb{display:flex;gap:.6em;justify-content:center;flex-wrap:wrap;padding:6px 4vw;font-size:.8em}
+#gb button{border-radius:30px;padding:.2em 1em}
+#gb b{color:var(--a);font-size:1.2em}
+.lb{display:flex;align-items:center;gap:.7em;margin:.5em 0}
+.lb span{flex:0 0 8em}
+.lb i{display:block;height:2em;border-radius:8px;background:var(--a);min-width:.5em}
+.lb.top i{background:#ffd166}
+.win{margin-top:1em;padding:.8em 1.1em;border:3px solid #ffd166;border-radius:16px;background:rgba(255,209,102,.15);font:700 clamp(1.4rem,3.4vw,3rem)/1.15 Georgia,serif}
+.win small{display:block;font:400 .4em "Avenir Next","Segoe UI",sans-serif;opacity:.9;margin-top:.4em}
+#bar{height:6px;background:rgba(0,0,0,.3)}
+#bar i{display:block;height:100%;background:var(--a);width:0;transition:width .2s}
+#nav{display:flex;justify-content:space-between;align-items:center;padding:8px 4vw;font-size:.7em}
+#nav span{opacity:.75;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="top"><span id="step"></span><span id="tm"></span></div>
+<main id="s" tabindex="-1"></main>
+<div id="gb"></div>
+<div id="bar"><i id="pb"></i></div>
+<div id="nav"><button id="pv">Back</button><span>Arrows move · T timer · R pick a voice · G groups · F full screen</span><span><button id="pickb">Pick a voice</button> <button id="expb">Export notes</button></span><button id="nx">Next</button></div>
+
+<div id="pk" role="dialog" aria-label="Pick a voice"><div><h2 style="margin:0">Pick a voice</h2><p class="sub" style="margin:.3em auto">One name per line. Names are saved on this device only.</p><textarea id="ro" placeholder="Name one&#10;Name two"></textarea><div id="pn" aria-live="polite"></div><button id="go">Pick</button> <button id="cl">Close</button></div></div>
+<div id="gs" role="dialog" aria-label="Groups and scores"><div><h2 style="margin:0">Groups and scoring</h2>
+<p class="sub" style="margin:.3em auto">Number of groups: <button data-gc="3">3</button> <button data-gc="4">4</button></p><div id="gl"></div>
+<p class="sub" style="text-align:left;font-size:.8em">Award for reasoning, not speed: +1 cites a case fact · +1 builds on or challenges another group with evidence · +2 best-defended recommendation or answer · +1 per correct bonus round. Click a group chip at the bottom of the screen to add 1, Shift-click to remove 1.</p>
+<button id="gz">Reset scores</button> <button id="gx">Close</button></div></div>
+<script>
+const OPT=[`Defend with small changes`,`Transparent AI production plus a paid diagnostic trial`,`Outcome-based pricing`,`Low-cost production leader`];
+const D=[
+{ty:`title`,t:`Harbourline Creative`,sub:`BADM 470 case facilitation. Team: Member 1, Member 2, Member 3, Member 4.`},
+{ty:`map`,t:`Our 90 minutes`,sub:`Click a segment to jump to it. Every step feeds the next, so the logic stays traceable.`},
+{k:`Opening`,m:5,t:`Would you buy Harbourline’s service at its current fee?`,
+ a:[[`Vote`,`Tap your answer. Shift-click removes a vote.`],[`Rule`,`Every claim cites a case fact.`],[`Rule`,`Keep evidence and interpretation apart, and name what we don’t know.`]],
+ w:{ty:`tally`,key:`poll`,items:[`Yes`,`No`,`Unsure`],big:1},o:`A shared question and one working rule.`},
+{k:`Step 1 of 10`,m:8,t:`What does the case tell us about performance?`,
+ a:[[`Pairs`,`Find the three performance facts that matter most.`],[`Post`,`Add one fact and tag it by column.`],[`Cluster`,`We group them into themes.`]],
+ w:{ty:`board`,key:`perf`,cols:[`Fact`,`Interpretation`]},o:`Evidence-backed performance concerns.`},
+{k:`Step 2 of 10`,m:10,t:`Which outside forces matter most?`,
+ a:[[`Stations`,`Buyers and substitutes, competitors, AI parity. Three minutes each, then rotate.`],[`Add`,`Add to the last group’s sheet instead of repeating it.`],[`Mark`,`Star your group’s most important force.`]],
+ w:{ty:`board`,key:`ext`,cols:[`Opportunities`,`Threats`]},o:`Top external opportunities and threats.`},
+{k:`Step 3 of 10`,m:10,t:`Which resources are real capabilities?`,
+ a:[[`Sort`,`Mark each resource: V valuable, R rare, I hard to imitate, O organized to capture value.`],[`Defend`,`Defend your most contested resource to the room.`]],
+ w:{ty:`vrio`,key:`vrio`,items:[`Local client knowledge`,`Brand judgement`,`Client relationships`,`AI access`,`Measurement skill`,`Incentives`,`Owner of the new value proposition`]},o:`Capability gaps and constraints.`},
+{k:`Step 4 of 10`,m:10,t:`Build the SWOT. No evidence, no place on the board.`,
+ a:[[`Add`,`Items from steps 1 to 3, each with a case fact.`],[`Strike`,`Click an item with no evidence to strike it out.`],[`Fix`,`Remove duplicates and items in the wrong box.`]],
+ w:{ty:`board`,key:`swot`,cols:[`Strengths`,`Weaknesses`,`Opportunities`,`Threats`]},o:`An evidence-backed SWOT.`},
+{k:`Step 5 of 10`,m:6,t:`Which concerns matter most?`,
+ a:[[`Dots`,`Three dots each. Tap a concern to add a dot.`],[`Justify`,`Explain by impact, relevance and importance.`]],
+ w:{ty:`tally`,key:`conc`,items:[`Value is invisible`,`Advisory capability isn’t repeatable`,`Routine production is losing value`,`Demand for paid advice is unproven`,`Trust and data permissions limit promises`,`Incentives work against the shift`],dots:1},o:`Top three strategic concerns, with reasons.`},
+{k:`Step 6 of 10`,m:6,t:`Harbourline must decide ___ in order to ___ within ___.`,
+ a:[[`Write`,`One sentence per group.`],[`Swap`,`Click a sentence that hides a solution or ignores a constraint to strike it.`],[`Pick`,`The class picks or merges one.`]],
+ w:{ty:`board`,key:`issue`,cols:[`Issue statements`]},o:`One strategic issue statement.`},
+{k:`Step 7 of 10`,m:12,t:`What could Harbourline realistically do?`,
+ a:[[`Options`,OPT.join(`; `)+`.`],[`Fill`,`Each group adds benefit, risk and assumption for its option.`],[`Pitch`,`60 seconds, then swap and challenge with case evidence.`]],
+ w:{ty:`board`,key:`alt`,cols:[`Benefit`,`Risk`,`Assumption`]},o:`Alternatives with benefits, risks and assumptions.`},
+{k:`Step 8 of 10`,m:8,t:`Which alternative do we recommend?`,
+ a:[[`Vote`,`Tap your choice. The minority states its strongest objection.`],[`Challenge`,`Finance manager, owner and coordinator each push back in one sentence.`],[`Act`,`Name the first three actions and one stop condition.`]],
+ w:{ty:`tally`,key:`rec`,items:OPT},o:`A class recommendation and its logic.`},
+{k:`Step 9 of 10`,m:5,t:`Can we trace the recommendation back to the evidence?`,
+ a:[[`Walk`,`Click each link: once if the logic holds, twice if there is a gap.`],[`Mark`,`Name any finding that disappeared or any idea that appeared without support.`]],
+ w:{ty:`trace`,key:`trace`,items:[`Evidence`,`SWOT`,`Concerns`,`Issue`,`Alternatives`,`Recommendation`]},o:`Gaps or inconsistencies named.`},
+{k:`Step 10 of 10`,m:10,t:`What did we learn?`,
+ a:[[`Team`,`We share our own recommendation in two minutes.`],[`Write`,`One thing we got right, one thing to test next.`],[`Carry on`,`Separate evidence from interpretation, build line of sight, name uncertainty.`]],
+ w:{ty:`board`,key:`close`,cols:[`Got right`,`Test next`,`Open questions`]},o:`Class takeaways and open questions.`},
+{k:`Bonus 1: case intelligence`,m:3,t:`What did the tourism client actually question?`,
+ a:[[`Read`,`Pick the strongest answer. Evidence first, interpretation second.`],[`Reveal`,`Show the answer after the room has defended its choices.`]],
+ w:{ty:`mc`,key:`b1`,opts:[`Whether it needs marketing at all`,`The fee and the six-week timeline`,`Whether the team is local`,`The choice of social platforms`],ans:1,why:`The case shows the client questioning the fee and the timeline. Anything beyond that is assumption.`},o:`Facts separated from the story.`},
+{k:`Bonus 2: framework lab`,m:3,t:`Match each tool to what it does.`,
+ a:[[`Match`,`Click a tool, then its meaning.`],[`Debate`,`Where would each tool be used in our analysis?`]],
+ w:{ty:`match`,key:`b2`,left:[`VRIO`,`PESTEL`,`SWOT`,`Five Forces`],right:[`Synthesizes supported strengths, weaknesses, opportunities and threats`,`Tests whether a resource is valuable, rare, hard to imitate and organized to capture value`,`Scans political, economic, social, technological, environmental and legal factors`,`Examines the competitive pressures on industry profit`],ans:[1,2,0,3],why:`Green means correct. Red means revisit it.`},o:`Shared language for the analysis steps.`},
+{k:`Bonus 3: connect the dots`,m:3,t:`Link each case signal to its strategic meaning.`,
+ a:[[`Link`,`Click a signal, then the implication it points to.`],[`Defend`,`Cite the evidence behind your link.`]],
+ w:{ty:`match`,key:`b3`,left:[`A former client now posts routine content in house`,`Reports show reach, clicks and engagement`,`Knowledge and relationships sit with individuals`,`Nine of 24 clients cite strategic advice`],right:[`Advisory demand exists but isn’t proven purchasing intent`,`Routine production faces real substitution`,`Campaign metrics are not customer outcomes`,`Capability isn’t yet repeatable`],ans:[1,2,3,0],why:`Green means correct. Red means revisit it.`},o:`Evidence linked to interpretation.`},
+{k:`Bonus 4: truth or assumption`,m:3,t:`Is each statement supported by the case?`,
+ a:[[`Decide`,`Mark True or False for each statement.`],[`Cite`,`Name the case fact that backs your answer.`]],
+ w:{ty:`tf`,key:`b4`,items:[[`The 15 clients wanting recurring content and the 9 wanting strategic advice are two separate groups.`,0,`Six clients wanted both, so the groups overlap. Check the exact counts against the case.`],[`Five clients have committed to a paid trial and none to an annual renewal.`,1,`This is a case fact and it limits how much we can conclude about demand.`],[`The interviews prove clients will pay a separate advisory fee.`,0,`Interest is not purchasing intent. The interviews are not a representative market study.`]]},o:`Facts and assumptions separated.`},
+{k:`Bonus 5: the boardroom`,m:3,t:`Which alternative best fits the evidence and constraints?`,
+ a:[[`Choose`,`Pick one, then defend it with case evidence.`],[`Compare`,`Weigh feasibility, trust, customer value and uncertainty.`]],
+ w:{ty:`mc`,key:`b5`,opts:OPT,ans:1,why:`The two-part offer fits what clients said they want and the constraints, and it can be tested with the five trial clients. Its risk is that demand for paid advice is unproven. Other choices can be defended with evidence.`},o:`A reasoned choice, not a vote.`},
+{k:`Bonus 6: 90-day mission`,m:3,t:`Rank the first moves, first to last.`,
+ a:[[`Rank`,`Use the arrows to order the actions.`],[`Justify`,`Explain what must come first and why.`]],
+ w:{ty:`rank`,key:`b6`,items:[`Engage a specialist for measurement`,`Run selective training and document decision reasoning`,`Offer the five trial clients a paid diagnostic`,`Adopt a consistent AI disclosure and permission policy`,`Name one accountable owner`],sug:[4,3,2,0,1],why:`An illustrative sequence, not an answer key. Reasoned alternatives are welcome.`},o:`A defensible sequence of actions.`},
+{ty:`lb`,t:`Which group reasoned best?`,sub:`Scores reward evidence and reasoning, not speed.`},
+{ty:`end`,t:`Source and AI use`,sub:`Anderson, L., Buengel, D., & Simpson, J. J. (2025). Strategic management and case analysis: An integrated approach. Virginia Tech Publishing. https://pressbooks.lib.vt.edu/strategicmanagementandcaseanalysis/`,
+ note:`AI (Claude, Anthropic) was used as a support tool to draft these materials. The team reviewed and verified them against the case and Chapter 2. The bonus-round formats were inspired by a shared web page, Harbourline: The Strategy Challenge (meetgoyani5.github.io); the questions here were rewritten from the case facts.`}
+];
+const TH=[[`#0f2b36`,`#1b5e72`,`#5fd0e0`],[`#2b1246`,`#6a2f9a`,`#ffa6dd`],[`#10343a`,`#0f7d6b`,`#7ef0c0`],[`#3a1a10`,`#a1431f`,`#ffc27a`],[`#13264d`,`#2f5fd0`,`#9cc4ff`],[`#38122e`,`#a31f6b`,`#ffb3d9`],[`#1b3a12`,`#4a8f1f`,`#c8f27a`],[`#3a2b10`,`#b0791a`,`#ffe08a`],[`#2b1246`,`#4527a0`,`#d1b3ff`],[`#0f2b36`,`#00838f`,`#80f0ff`],[`#3a1a10`,`#c0392b`,`#ffb199`]];
+const KEY=`hl-slides`;
+let ST={};try{ST=JSON.parse(localStorage.getItem(KEY)||`{}`)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const $=id=>document.getElementById(id),N=D.length;
+const esc=s=>String(s).replace(/&/g,`&amp;`).replace(/</g,`&lt;`);
+const fmt=s=>{const a=Math.abs(s);return(s<0?`+`:``)+Math.floor(a/60)+`:`+String(a%60).padStart(2,`0`)};
+let i=0,iv=null,left=0,run=false,focus=null;
+function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=660;g.gain.value=.15;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.5)}catch(e){}}
+const G=()=>{const g=ST._g=ST._g||{n:[`Group 1`,`Group 2`,`Group 3`,`Group 4`],p:[0,0,0,0],c:4};return g};
+function gbar(){const g=G();$(`gb`).innerHTML=g.n.slice(0,g.c).map((x,j)=>`<button data-g="${j}" title="Click +1, Shift-click -1">${esc(x)}: <b>${g.p[j]}</b></button>`).join(``)}
+function gset(){const g=G();$(`gl`).innerHTML=g.n.map((x,j)=>j<g.c?`<input class="gs-i" data-gn="${j}" value="${esc(x)}" aria-label="Group ${j+1} name">`:``).join(``)}
+function confetti(){if(matchMedia(`(prefers-reduced-motion:reduce)`).matches)return;const c=document.createElement(`canvas`);c.style.cssText=`position:fixed;inset:0;pointer-events:none;z-index:20`;c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);const x=c.getContext(`2d`),cl=[`#ffd166`,`#ff9ad5`,`#9be564`,`#5fd0e0`,`#fff`],P=Array.from({length:160},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,vx:Math.random()*4-2,vy:2+Math.random()*4,s:5+Math.random()*7,c:cl[Math.floor(Math.random()*5)]}));let f=0;(function a(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;x.fillStyle=p.c;x.fillRect(p.x,p.y,p.s,p.s*.6)});if(++f<200)requestAnimationFrame(a);else c.remove()})()}
+const stopT=()=>{clearInterval(iv);iv=null;run=false};
+function widget(w){
+ const k=w.key;
+ if(w.ty===`tally`){
+  const v=ST[k]=ST[k]||w.items.map(()=>0),mx=Math.max(1,...v);
+  const ctl=`<div class="ctl"><button data-clr="${k}">Clear votes</button></div>`;
+  if(w.big)return `<div class="row">${w.items.map((x,j)=>`<button class="big" data-tv="${k}|${j}">${esc(x)}<small>${v[j]} vote${v[j]===1?``:`s`}</small></button>`).join(``)}</div>`+ctl;
+  return w.items.map((x,j)=>`<div class="tl"><button data-tv="${k}|${j}">${esc(x)}</button>${w.dots?`<span class="dots">${`●`.repeat(v[j])}</span>`:`<span style="flex:1;background:rgba(0,0,0,.25);border-radius:6px"><i style="display:block;height:1.1em;border-radius:6px;background:var(--a);width:${v[j]/mx*100}%"></i></span><b>${v[j]}</b>`}</div>`).join(``)+ctl;
+ }
+ if(w.ty===`board`){
+  const b=ST[k]=ST[k]||w.cols.map(()=>[]);
+  return `<div class="cols">${w.cols.map((c,ci)=>`<div class="col"><h3>${esc(c)}</h3><input data-bk="${k}|${ci}" placeholder="Type, press Enter" aria-label="Add to ${esc(c)}">${b[ci].map((it,ii)=>`<div class="it ${it.s?`x`:``}" data-bt="${k}|${ci}|${ii}"><span>${esc(it.x)}</span><button data-bx="${k}|${ci}|${ii}" aria-label="Remove">×</button></div>`).join(``)}</div>`).join(``)}</div><div class="ctl">Click an item to strike it out. × removes it. <button data-clr="${k}">Clear board</button></div>`;
+ }
+ if(w.ty===`vrio`){
+  const v=ST[k]=ST[k]||w.items.map(()=>``);
+  return w.items.map((x,j)=>`<div class="vr"><label>${esc(x)}</label>${[`V`,`R`,`I`,`O`].map(L=>`<button class="${v[j].includes(L)?`on`:``}" data-vr="${k}|${j}|${L}">${L}</button>`).join(``)}<b>${v[j].length===4?`Sustained advantage`:v[j].length?`Not yet`:``}</b></div>`).join(``)+`<div class="ctl"><button data-clr="${k}">Clear</button></div>`;
+ }
+ const rv=(v,extra)=>`<div class="ctl"><button data-rv="${k}">${v.r?`Hide answer`:`Reveal answer`}</button> <button data-clr="${k}">Reset</button></div>${v.r&&extra?`<div class="why">${esc(extra)}</div>`:``}`;
+ if(w.ty===`mc`){
+  const v=ST[k]=ST[k]||{s:-1,r:0};
+  return w.opts.map((x,j)=>`<button class="op ${v.r&&j===w.ans?`ok`:v.r&&v.s===j?`no`:v.s===j?`on`:``}" data-mc="${k}|${j}">${String.fromCharCode(65+j)}. ${esc(x)}</button>`).join(``)+rv(v,w.why);
+ }
+ if(w.ty===`tf`){
+  const v=ST[k]=ST[k]||{a:w.items.map(()=>-1),r:0};
+  return w.items.map((x,j)=>`<div class="vr"><label style="flex:1 1 20em">${esc(x[0])}</label>${[1,0].map(b=>`<button style="width:5em" class="${v.a[j]===b?`on`:``} ${v.r&&b===x[1]?`ok`:``}" data-tf="${k}|${j}|${b}">${b?`True`:`False`}</button>`).join(``)}</div>${v.r?`<div class="why">${x[1]?`True`:`False`}: ${esc(x[2])}</div>`:``}`).join(``)+rv(v);
+ }
+ if(w.ty===`match`){
+  const v=ST[k]=ST[k]||{s:-1,m:w.left.map(()=>-1),r:0};
+  return `<div class="two"><div>${w.left.map((x,j)=>`<button class="op ${v.s===j?`on`:``} ${v.r?(v.m[j]===w.ans[j]?`ok`:`no`):``}" data-ml="${k}|${j}">${j+1}. ${esc(x)}${v.m[j]>=0?` → ${String.fromCharCode(65+v.m[j])}`:``}</button>`).join(``)}</div><div>${w.right.map((x,j)=>`<button class="op" data-mr="${k}|${j}">${String.fromCharCode(65+j)}. ${esc(x)}${v.m.map((m,i)=>m===j?` (${i+1})`:``).join(``)}</button>`).join(``)}</div></div><div class="ctl">Click a left card, then its match on the right.</div>`+rv(v,w.why);
+ }
+ if(w.ty===`rank`){
+  const v=ST[k]=ST[k]||{o:w.items.map((x,j)=>j),r:0};
+  return v.o.map((it,p)=>`<div class="vr"><b>${p+1}</b><button data-ru="${k}|${p}|-1" aria-label="Move up">▲</button><button data-ru="${k}|${p}|1" aria-label="Move down">▼</button><label style="flex:1 1 20em">${esc(w.items[it])}</label>${v.r?`<b>Suggested #${w.sug.indexOf(it)+1}</b>`:``}</div>`).join(``)+rv(v,w.why);
+ }
+ if(w.ty===`trace`){
+  const v=ST[k]=ST[k]||w.items.map(()=>0);
+  return `<div class="ch">${w.items.map((x,j)=>`<button class="${[``,`t1`,`t2`][v[j]]}" data-tr="${k}|${j}">${esc(x)}${[``,` ✓`,` gap`][v[j]]}</button>`).join(`<b aria-hidden="true">›</b>`)}</div><div class="ctl">Green: the logic holds. Orange: a gap or inconsistency. <button data-clr="${k}">Clear</button></div>`;
+ }
+ return ``;
+}
+function draw(){
+ const d=D[i];let h=``;
+ if(d.ty===`lb`){const g=G(),r=g.n.slice(0,g.c).map((x,j)=>[x,g.p[j]]).sort((a,b)=>b[1]-a[1]),mx=Math.max(1,r[0][1]);h=`<h1>${esc(d.t)}</h1><p class="sub">${esc(d.sub)}</p>${r.map((x,j)=>`<div class="lb ${x[1]===r[0][1]&&x[1]>0?`top`:``}"><span>${esc(x[0])}</span><i style="width:${x[1]/mx*60}%"></i><b>${x[1]}</b></div>`).join(``)}${ST._w?(r[0][1]===0?`<div class="win">No points yet</div>`:`<div class="win">${r.filter(x=>x[1]===r[0][1]).length>1?`It’s a tie: ${r.filter(x=>x[1]===r[0][1]).map(x=>esc(x[0])).join(` and `)}`:`${esc(r[0][0])} wins`} with ${r[0][1]} points<small>Congratulations. Now tell us what made the reasoning strong.</small></div>`):`<p><button data-win="1" style="font-size:1.2em;padding:.5em 1.4em">Reveal the winner</button></p>`}`}
+ else if(d.ty===`map`){h=`<h1>${esc(d.t)}</h1><p class="sub">${esc(d.sub)}</p><div class="map">${D.map((x,j)=>x.m?`<button data-go="${j}"><b>${x.m} min</b>${esc(x.k)}<small>${esc(x.t.length>46?x.t.slice(0,44)+`…`:x.t)}</small></button>`:``).join(``)}</div>`}
+ else if(d.ty){h=`<h1>${esc(d.t)}</h1><p class="sub">${esc(d.sub)}</p>${d.note?`<p class="sub">${esc(d.note)}</p>`:``}`}
+ else{
+  h=`<h1 class="sm">${esc(d.t)}</h1><div class="how">${d.a.map(x=>`<div><b>${x[0]}</b><br>${esc(x[1])}</div>`).join(``)}</div><div class="w">${widget(d.w)}</div><div class="out"><strong>Output:</strong> ${esc(d.o)}</div>`;
+ }
+ $(`s`).innerHTML=h;
+ if(focus){const e=document.querySelector(`[data-bk="${focus}"]`);if(e)e.focus()}
+}
+function show(n){
+ i=Math.max(0,Math.min(N-1,n));stopT();focus=null;
+ const d=D[i],t=TH[i%TH.length],r=document.documentElement.style;
+ r.setProperty(`--b1`,t[0]);r.setProperty(`--b2`,t[1]);r.setProperty(`--a`,t[2]);
+ left=(d.m||0)*60;$(`tm`).textContent=d.m?fmt(left):``;$(`tm`).className=``;
+ $(`step`).textContent=d.k||``;
+ $(`pb`).style.width=((i+1)/N*100)+`%`;
+ $(`pv`).disabled=i===0;$(`nx`).disabled=i===N-1;
+ draw();
+ try{history.replaceState(null,``,`#s`+i)}catch(e){}
+}
+function toggleT(){
+ if(!D[i].m)return;
+ if(run){stopT();return}
+ run=true;
+ const tick=()=>{if(left===0)beep();$(`tm`).textContent=fmt(left);$(`tm`).className=left<0?`late`:``;left--};
+ tick();iv=setInterval(tick,1000);
+}
+$(`s`).addEventListener(`click`,e=>{
+ const g=a=>{const el=e.target.closest(`[${a}]`);return el?el.getAttribute(a).split(`|`):null};
+ let p;
+ if(p=g(`data-go`)){show(+p[0]);return}
+ else if(p=g(`data-win`)){ST._w=1;confetti()}
+ else if(p=g(`data-clr`)){const k=p[0];delete ST[k];focus=null}
+ else if(p=g(`data-tv`)){const v=ST[p[0]];v[+p[1]]=Math.max(0,v[+p[1]]+(e.shiftKey?-1:1))}
+ else if(p=g(`data-bx`)){ST[p[0]][+p[1]].splice(+p[2],1);focus=p[0]+`|`+p[1]}
+ else if(p=g(`data-bt`)){const it=ST[p[0]][+p[1]][+p[2]];it.s=!it.s}
+ else if(p=g(`data-vr`)){const v=ST[p[0]],j=+p[1];v[j]=v[j].includes(p[2])?v[j].replace(p[2],``):v[j]+p[2]}
+ else if(p=g(`data-mc`)){const v=ST[p[0]];if(!v.r)v.s=+p[1]}
+ else if(p=g(`data-rv`)){const v=ST[p[0]];v.r=v.r?0:1}
+ else if(p=g(`data-tf`)){const v=ST[p[0]];if(!v.r)v.a[+p[1]]=+p[2]}
+ else if(p=g(`data-ml`)){const v=ST[p[0]];if(!v.r)v.s=+p[1]}
+ else if(p=g(`data-mr`)){const v=ST[p[0]];if(!v.r&&v.s>=0){v.m[v.s]=+p[1];v.s=-1}}
+ else if(p=g(`data-ru`)){const v=ST[p[0]],a=+p[1],b=a+ +p[2];if(!v.r&&b>=0&&b<v.o.length)[v.o[a],v.o[b]]=[v.o[b],v.o[a]]}
+ else if(p=g(`data-tr`)){const v=ST[p[0]];v[+p[1]]=(v[+p[1]]+1)%3}
+ else return;
+ save();draw();
+});
+document.addEventListener(`keydown`,e=>{
+ const t=e.target;
+ if(e.key===`Escape`){$(`pk`).classList.remove(`on`);$(`gs`).classList.remove(`on`)}
+ if(t.tagName===`TEXTAREA`)return;
+ if(t.tagName===`INPUT`){
+  if(e.key===`Enter`&&t.dataset.bk&&t.value.trim()){const p=t.dataset.bk.split(`|`);ST[p[0]][+p[1]].push({x:t.value.trim(),s:0});focus=t.dataset.bk;save();draw()}
+  return;
+ }
+ if(e.key===`ArrowRight`||e.key===` `&&t.tagName!==`BUTTON`||e.key===`PageDown`){e.preventDefault();show(i+1)}
+ else if(e.key===`ArrowLeft`||e.key===`PageUp`){e.preventDefault();show(i-1)}
+ else if(e.key===`t`||e.key===`T`)toggleT();
+ else if(e.key===`r`||e.key===`R`)openPk();
+ else if(e.key===`g`||e.key===`G`)openGs();
+ else if(e.key===`f`||e.key===`F`){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+});
+$(`gb`).addEventListener(`click`,e=>{const b=e.target.closest(`[data-g]`);if(!b)return;const g=G(),j=+b.dataset.g;g.p[j]=Math.max(0,g.p[j]+(e.shiftKey?-1:1));save();gbar();if(D[i].ty===`lb`)draw()});
+$(`gs`).addEventListener(`click`,e=>{const c=e.target.closest(`[data-gc]`);if(c){G().c=+c.dataset.gc;save();gset();gbar()}});
+$(`gs`).addEventListener(`input`,e=>{const t=e.target;if(t.dataset.gn!==undefined){G().n[+t.dataset.gn]=t.value;save();gbar()}});
+$(`gz`).onclick=()=>{G().p=[0,0,0,0];ST._w=0;save();gbar();draw()};
+$(`gx`).onclick=()=>$(`gs`).classList.remove(`on`);
+function openGs(){gset();$(`gs`).classList.add(`on`)}
+gbar();
+function openPk(){$(`ro`).value=ST._r||``;$(`pn`).textContent=``;$(`pk`).classList.add(`on`)}
+$(`ro`).oninput=()=>{ST._r=$(`ro`).value;save()};
+$(`go`).onclick=()=>{const n=$(`ro`).value.split(`\n`).map(x=>x.trim()).filter(Boolean);if(!n.length){$(`pn`).textContent=`Add names first`;return}
+ let c=0;const iv2=setInterval(()=>{$(`pn`).textContent=n[Math.floor(Math.random()*n.length)];if(++c>14){clearInterval(iv2)}},70)};
+$(`cl`).onclick=()=>$(`pk`).classList.remove(`on`);$(`pickb`).onclick=openPk;
+$(`expb`).onclick=()=>{
+ const g=G();let o=`Harbourline Creative class output\n\nScores: `+g.n.slice(0,g.c).map((x,j)=>x+` `+g.p[j]).join(`, `)+`\n\n`;
+ D.forEach(d=>{const w=d.w;if(!w||!ST[w.key]||[`mc`,`tf`,`match`,`rank`].includes(w.ty))return;const v=ST[w.key];o+=`## ${d.k}: ${d.t}\n`;
+  if(w.ty===`board`)w.cols.forEach((c,j)=>{o+=`${c}:\n`+v[j].map(it=>`  - ${it.s?`[struck] `:``}${it.x}`).join(`\n`)+`\n`});
+  else if(w.ty===`tally`)w.items.forEach((x,j)=>{o+=`  ${x}: ${v[j]}\n`});
+  else if(w.ty===`vrio`)w.items.forEach((x,j)=>{o+=`  ${x}: ${v[j]||`-`}\n`});
+  else w.items.forEach((x,j)=>{o+=`  ${x}: ${[`untouched`,`logic holds`,`gap`][v[j]]}\n`});
+  o+=`\n`});
+ const a=document.createElement(`a`);a.href=URL.createObjectURL(new Blob([o],{type:`text/plain`}));a.download=`harbourline-class-output.txt`;a.click()};
+$(`pv`).onclick=()=>show(i-1);$(`nx`).onclick=()=>show(i+1);$(`tm`).onclick=toggleT;
+const m=/^#s(\d+)$/.exec(location.hash);
+show(m?+m[1]:0);
+</script>
+</body>
+</html>

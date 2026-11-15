@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbourline Creative: Case Facilitation Runbook</title>
+<style>
+:root{--bg:#eef3f4;--card:#fff;--ink:#0f2b36;--mut:#4d6670;--teal:#1b6b7a;--rope:#b88a3e;--sig:#c93d22;--line:#cfdce0}
+@media (prefers-color-scheme:dark){:root{--bg:#0c1d24;--card:#132a33;--ink:#e6f0f2;--mut:#9db4bb;--teal:#5fb3c2;--rope:#d9b06a;--sig:#ff7a5c;--line:#28434d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif}
+header{background:var(--ink);color:#eef3f4;padding:28px 20px 22px}
+header .w,main{max-width:860px;margin:0 auto}
+h1{font:700 clamp(1.7rem,4vw,2.4rem)/1.15 Georgia,"Iowan Old Style",serif;margin:0 0 6px}
+header p{margin:0;color:#b9ced4;max-width:62ch}
+.bar{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 20px}
+.bar .w{max-width:860px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.clock{font:700 1.5rem Georgia,serif;font-variant-numeric:tabular-nums;min-width:4.6ch}
+button{font:inherit;cursor:pointer;border:1px solid var(--teal);background:transparent;color:var(--teal);padding:6px 14px;border-radius:6px}
+button.p{background:var(--teal);color:#fff}
+button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--rope);outline-offset:2px}
+.sp{flex:1}
+main{padding:22px 20px 60px}
+h2{font:700 1.25rem Georgia,serif;margin:28px 0 10px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:.93rem}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+.wrap{overflow-x:auto}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.chain span{padding:4px 10px;border:1px dashed var(--mut);border-radius:20px;font-size:.85rem;color:var(--mut)}
+.chain span.on{border:1px solid var(--teal);background:var(--teal);color:#fff}
+details{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:6px;margin:10px 0}
+details[open]{border-left-color:var(--rope)}
+summary{cursor:pointer;padding:12px 14px;display:flex;gap:12px;align-items:baseline;list-style:none}
+summary::-webkit-details-marker{display:none}
+.n{font:700 1.1rem Georgia,serif;color:var(--teal);min-width:1.6ch}
+.t{font-weight:600;flex:1}
+.m{color:var(--mut);font-size:.9rem}
+.b{padding:2px 16px 16px 16px}
+.b h3{font-size:.95rem;margin:14px 0 4px;color:var(--teal)}
+.b ul,.b ol{margin:0;padding-left:1.25rem}
+.b li{margin:3px 0}
+.say{border-left:3px solid var(--sig);padding:2px 10px;margin:8px 0;color:var(--mut);font-style:italic}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.row label{color:var(--mut);font-size:.9rem}
+.cd{font:700 1.2rem Georgia,serif;font-variant-numeric:tabular-nums}
+.cd.late{color:var(--sig)}
+.note{font-size:.88rem;color:var(--mut);margin-top:30px;border-top:1px solid var(--line);padding-top:12px}
+.flag{background:var(--card);border:1px solid var(--rope);border-radius:6px;padding:10px 14px;font-size:.92rem;margin-top:16px}
+@media (prefers-reduced-motion:no-preference){details[open] .b{animation:o .18s ease-out}@keyframes o{from{opacity:.4}to{opacity:1}}}
+@media print{.bar,button{display:none}details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<h1>Harbourline Creative: case facilitation runbook</h1>
+<p>BADM 470 · 90-minute class facilitation built on the abbreviated case analysis process (Chapter 2). Solve first, facilitate second: the class does the thinking.</p>
+<p style="margin-top:10px"><a href="slides.html" style="color:#d9b06a">Open the class-facing slides</a> (project these; keep this page on your own screen)</p>
+</div></header>
+
+<div class="bar"><div class="w">
+<span class="clock" id="clock" aria-live="off">0:00</span>
+<button class="p" id="go">Start session clock</button>
+<button id="rs">Reset</button>
+<span class="sp"></span>
+<button id="dl">Download notes</button>
+</div></div>
+
+<main>
+<h2>Run of show</h2>
+<div class="wrap"><table><thead><tr><th>Start</th><th>Segment</th><th>Min</th><th>Lead</th><th>Class output</th></tr></thead><tbody id="ros"></tbody></table></div>
+
+<h2>Line of sight</h2>
+<p style="margin:0;color:var(--mut)">Each link lights up once the team has captured the class’s output for it. Gaps show where the logic would break.</p>
+<div class="chain" id="chain"></div>
+
+<h2>Segments</h2>
+<div id="seg"></div>
+
+<div class="flag"><strong>Before class:</strong> this plan is drawn from the individual analysis only. Check every fact below against the case text, including the client counts (15 recurring content, 9 strategic advice, 6 wanting both, out of 24 interviewed) and the three-week, no-hiring, no-layoffs constraints. Replace “Member 1–4” with your team’s names and compare your four individual analyses before locking the flow.</div>
+
+<p class="note">AI use: this runbook was drafted with Claude (Anthropic) as a support tool and must be reviewed and verified against the case and Chapter 2 (Anderson, Buengel, &amp; Simpson, 2025). Cite AI use in your submission as the assignment instructions require.</p>
+</main>
+
+<script>
+const S=[
+{t:`Opening and framing`,k:`Setup`,m:5,o:`Shared strategic question; class norms`,
+ pu:`Frame the case and how the class will work. Do not retell it.`,
+ a:[`Pose the question: how can Harbourline Creative justify what it charges when clients can draft with AI themselves?`,`Quick poll: “Right now, would you buy Harbourline’s service at its current fee?” (yes / no / unsure)`,`State the rules: every claim cites a case fact, we separate evidence from interpretation, and we name what we still don’t know.`],
+ q:[`What would change your answer to the poll by the end of the session?`],
+ say:`We are not here to tell you what to think. We are here to build the analysis together, with evidence.`},
+{t:`Organizational performance`,k:`Step 1`,m:8,o:`Evidence-backed performance concerns`,
+ pu:`Identify performance signals and symptoms. The case has no financials, so performance comes from qualitative evidence.`,
+ a:[`Pairs scan the case and pick the three performance facts that matter most.`,`Each pair posts one fact and tags it Fact or Interpretation.`,`Class clusters the facts into themes.`],
+ q:[`Which of these facts is a measure, and which is an anecdote?`,`Reports show reach, clicks and engagement. Why might that be a problem for this firm?`,`The tourism client questions the fee and six-week timeline. How much weight does one client carry?`,`What performance data is missing, and how does that limit what we can conclude?`]},
+{t:`External environment`,k:`Step 2`,m:10,o:`Top external opportunities and threats`,
+ pu:`Identify the forces shaping Harbourline’s choices and rank which matter most.`,
+ a:[`Three stations: buyers and substitutes, competitors, and AI parity (everyone has the same access).`,`Groups rotate every three minutes, adding to the last group’s sheet instead of repeating it.`,`Each group marks its single most important force.`],
+ q:[`If clients and competitors have the same AI, what can’t a client copy?`,`The coordinator wants speed, the owner wants impact, the finance manager wants a justified fee. Who is the real buyer, and why does it matter?`,`Interest from 24 interviewed clients is not purchasing intent. What would count as stronger evidence?`]},
+{t:`Internal environment`,k:`Step 3`,m:10,o:`Capability gaps and constraints`,
+ pu:`Test whether Harbourline’s valuable resources are repeatable capabilities.`,
+ a:[`Resource cards (local client knowledge, brand judgement, relationships, AI access, measurement skill, incentives, ownership of the new proposition).`,`Teams sort each card through VRIO: valuable, rare, hard to imitate, organized to capture value.`,`Teams defend their most contested card to the room.`],
+ q:[`Where does knowledge sit today: in the firm or in individuals?`,`Which resource is valuable but not rare?`,`What would have to be true for brand judgement to count as a capability?`]},
+{t:`SWOT synthesis`,k:`Step 4`,m:10,o:`An evidence-backed SWOT with vague items removed`,
+ pu:`Synthesize steps 1 to 3. SWOT is a summary of earlier analysis, not a box-filling exercise.`,
+ a:[`Class builds the SWOT on the shared board, each item tagged with its source (performance, external or internal).`,`Strike-it-out round: any item without a case fact behind it gets removed.`,`Teams flag any item that appears twice or sits in the wrong box.`],
+ q:[`What is the evidence for that item?`,`Is inconsistent AI disclosure an internal weakness or an external threat?`,`Which earlier finding is missing from this SWOT?`]},
+{t:`Strategic concerns`,k:`Step 5`,m:6,o:`Top three strategic concerns with rationale`,
+ pu:`Prioritize the tensions that emerge from the SWOT.`,
+ a:[`Show the candidate concerns: value is invisible, advisory capability isn’t repeatable, routine production is losing value, demand for paid advice is unproven, trust and data permissions limit promises, incentives work against the shift.`,`Dot vote: each person places three dots, then justifies by impact, relevance and importance.`],
+ q:[`Which concern, if solved, makes the others easier?`,`Which one looks big but has limited impact or relevance?`]},
+{t:`Strategic issue`,k:`Step 6`,m:6,o:`One-sentence strategic issue statement`,
+ pu:`Frame the central decision before anyone proposes a solution.`,
+ a:[`Teams write the issue in one sentence: “Harbourline must decide ___ in order to ___ within ___.”`,`Teams swap sentences and mark any that hide a solution or ignore a constraint.`,`Class picks or merges one.`],
+ q:[`Does this statement include the constraints (timeline, no hiring, no layoffs)?`,`Does it come from the concerns we ranked, or is it new?`]},
+{t:`Strategic alternatives`,k:`Step 7`,m:12,o:`Alternatives with benefits, risks and assumptions`,
+ pu:`Generate realistic options and surface the trade-offs.`,
+ a:[`Assign four options: defend with small changes, transparent AI production plus a paid diagnostic trial, outcome-based pricing, low-cost production leader.`,`Each group fills a comparison matrix (benefit, risk, assumption) and pitches in 60 seconds.`,`Groups then swap and attack another group’s option using case evidence.`],
+ q:[`What has to be true for this option to work?`,`Does it fit the constraints in our issue statement?`,`Which option does the evidence actively undermine?`]},
+{t:`Recommendation`,k:`Step 8`,m:8,o:`A class recommendation and its supporting logic`,
+ pu:`Select and defend one alternative.`,
+ a:[`Class votes with a poll, then the minority states its strongest objection.`,`Role prompts: the finance manager, the owner and the coordinator each challenge the choice in one sentence.`,`Class names the first three actions and one stop condition.`],
+ q:[`Which assumption are we least sure of?`,`What result in the first 90 days would make us change course?`]},
+{t:`Line of sight and congruence`,k:`Step 9`,m:5,o:`Gaps or inconsistencies identified`,
+ pu:`Check that the logic reconciles from evidence to recommendation.`,
+ a:[`Trace the recommendation back through issue, concerns, SWOT and evidence on the board.`,`Class marks any finding that disappeared or any new idea that appeared without support.`],
+ q:[`Where did an essential finding get dropped?`,`What do we still not know (financials, willingness to pay a separate advisory fee, how unique the relationships are)?`]},
+{t:`Closing debrief`,k:`Step 10`,m:10,o:`Team recommendation shared; class takeaways and open questions`,
+ pu:`Consolidate learning and briefly share the team’s own view.`,
+ a:[`Team shares its recommendation and 90-day plan in two minutes, noting where it differs from the class.`,`One-minute written reflection: one thing the class got right, one thing we’d test next.`,`Read out unresolved questions and connect back to Chapter 2: separate evidence from interpretation, build line of sight, name uncertainty.`],
+ q:[`How did our view change from the opening poll?`],
+ say:`We are not selling our recommendation. The goal was visible, coherent and defensible reasoning.`}
+];
+const KEY="hl-fac-";
+const ld=k=>{try{return localStorage.getItem(KEY+k)||""}catch(e){return""}};
+const sv=(k,v)=>{try{localStorage.setItem(KEY+k,v)}catch(e){}};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const fmt=s=>Math.floor(s/60)+":"+String(Math.abs(s)%60).padStart(2,"0");
+let at=0;
+const ros=document.getElementById("ros"),seg=document.getElementById("seg"),chain=document.getElementById("chain");
+S.forEach((s,i)=>{
+ ros.insertAdjacentHTML("beforeend",`<tr><td>${fmt(at*60)}</td><td>${s.k==="Setup"?"":s.k+": "}${s.t}</td><td>${s.m}</td><td id="rl${i}">–</td><td>${s.o}</td></tr>`);
+ at+=s.m;
+ seg.insertAdjacentHTML("beforeend",`<details id="d${i}"><summary><span class="n">${i}</span><span class="t">${s.t}</span><span class="m">${s.m} min</span></summary><div class="b">
+ <h3>Purpose</h3><p style="margin:0">${s.pu}</p>
+ ${s.say?`<div class="say">${s.say}</div>`:""}
+ <h3>Activity</h3><ol>${s.a.map(x=>`<li>${x}</li>`).join("")}</ol>
+ <h3>Probing questions</h3><ul>${s.q.map(x=>`<li>${x}</li>`).join("")}</ul>
+ <h3>Expected output</h3><p style="margin:0">${s.o}</p>
+ <div class="row"><label for="l${i}">Lead</label><input type="text" id="l${i}" placeholder="Member 1–4" style="max-width:220px">
+ <button data-t="${i}">Start ${s.m}:00 timer</button><span class="cd" id="c${i}"></span></div>
+ <h3>Capture the class’s output</h3><textarea id="n${i}" aria-label="Class output for ${s.t}"></textarea></div></details>`);
+});
+document.getElementById("ros").insertAdjacentHTML("beforeend",`<tr><td></td><td><strong>Total</strong></td><td><strong>${at}</strong></td><td></td><td></td></tr>`);
+const links=S.slice(1,9);
+function paint(){
+ chain.innerHTML=links.map((s,j)=>`<span class="${ld("n"+(j+1)).trim()?"on":""}">${s.t}</span>`).join("<b aria-hidden='true'>›</b>");
+}
+S.forEach((s,i)=>{
+ const n=document.getElementById("n"+i),l=document.getElementById("l"+i);
+ n.value=ld("n"+i);l.value=ld("l"+i);
+ if(l.value)document.getElementById("rl"+i).textContent=l.value;
+ n.addEventListener("input",()=>{sv("n"+i,n.value);paint()});
+ l.addEventListener("input",()=>{sv("l"+i,l.value);document.getElementById("rl"+i).textContent=l.value||"–"});
+});
+paint();
+let ti=null,tl=0,tid=null;
+seg.addEventListener("click",e=>{
+ const b=e.target.closest("button[data-t]");if(!b)return;
+ const i=+b.dataset.t,c=document.getElementById("c"+i);
+ if(tid===i){clearInterval(ti);tid=null;b.textContent=`Start ${S[i].m}:00 timer`;return}
+ clearInterval(ti);document.querySelectorAll("button[data-t]").forEach(x=>x.textContent=`Start ${S[+x.dataset.t].m}:00 timer`);
+ tl=S[i].m*60;tid=i;b.textContent="Pause timer";
+ const tick=()=>{c.textContent=(tl<0?"+":"")+fmt(tl);c.className="cd"+(tl<0?" late":"");tl--};
+ tick();ti=setInterval(tick,1000);
+});
+let sc=0,si=null;
+const clk=document.getElementById("clock"),go=document.getElementById("go");
+go.onclick=()=>{
+ if(si){clearInterval(si);si=null;go.textContent="Resume session clock";return}
+ si=setInterval(()=>{sc++;clk.textContent=fmt(sc)},1000);go.textContent="Pause session clock";
+};
+document.getElementById("rs").onclick=()=>{clearInterval(si);si=null;sc=0;clk.textContent="0:00";go.textContent="Start session clock"};
+document.getElementById("dl").onclick=()=>{
+ const txt=S.map((s,i)=>`${i}. ${s.t} (${s.m} min) | Lead: ${ld("l"+i)||"-"}\n${ld("n"+i)||"(no notes)"}\n`).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));a.download="harbourline-facilitation-notes.txt";a.click();
+};
+</script>
+</body>
+</html>
